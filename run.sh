@@ -16,6 +16,7 @@ do
 	  echo '	Setup Completed You can start the assessment tasks          '
 	  echo '-------------------------------------------------------------'
 	  echo "Below is the related information for your reference"
+   	  aws cloudformation describe-stacks --stack-name TagMan --query "Stacks[*].Outputs[*].{OutputKey: OutputKey, OutputValue: OutputValue, Description: Description}" --output table
 	  break
 	  ;;
 	"Delete Tag Management Stack")
