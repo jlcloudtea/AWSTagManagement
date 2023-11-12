@@ -15,7 +15,7 @@ do
  	  echo '-------------------------------------------------------------'
 	  echo '	Setup Completed You can start the assessment tasks          '
 	  echo '-------------------------------------------------------------'
-	  echo "Below is the related information for your reference"
+	  echo "There are 1 Command host, 1 NAT device, 2 App servers and 5 Web servers total 9 servers created for this task"
    	  aws cloudformation describe-stacks --stack-name TagMan --query "Stacks[*].Outputs[*].{OutputKey: OutputKey, OutputValue: OutputValue, Description: Description}" --output table
 	  break
 	  ;;
