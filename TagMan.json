@@ -501,9 +501,6 @@
 							]
 						]
 					}
-				},
-				"IAMRole": {
-					"Ref": "LabInstanceProfile"
 				}
 			},
 			"CreationPolicy": {
