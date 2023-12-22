@@ -12,6 +12,8 @@ do
 	  echo '-------------------------------------------------------------'
 	  aws cloudformation create-stack --stack-name TagMan --template-body "file://TagMan.json" >/dev/null 2>&1
 	  aws cloudformation wait stack-create-complete --stack-name TagMan
+	  INSTANCE_ID=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=Command Host" --query "Reservations[*].Instances[*].InstanceId" --output text)
+	  aws ec2 associate-iam-instance-profile --instance-id $INSTANCE_ID --iam-instance-profile Name="LabInstanceProfile"
  	  echo '-------------------------------------------------------------'
 	  echo '	Setup Completed You can start the assessment tasks          '
 	  echo '-------------------------------------------------------------'
