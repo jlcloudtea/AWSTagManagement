@@ -12,8 +12,9 @@ do
 	  echo '-------------------------------------------------------------'
 	  aws cloudformation create-stack --stack-name TagMan --template-body "file://TagMan.json" >/dev/null 2>&1
 	  aws cloudformation wait stack-create-complete --stack-name TagMan
-	  INSTANCE_ID=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=Command Host" --query "Reservations[*].Instances[*].InstanceId" --output text)
-	  aws ec2 associate-iam-instance-profile --instance-id $INSTANCE_ID --iam-instance-profile Name="LabInstanceProfile"
+	  INSTANCE_ID=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=Command Host" "Name=tag:aws:cloudformation:stack-name,Values=TagMan" "Name=instance-state-name,Values=running" --query "Reservations[*].Instances[*].InstanceId" --output text)
+	  aws ec2 associate-iam-instance-profile --instance-id $INSTANCE_ID --iam-instance-profile Name="LabInstanceProfile" >/dev/null 2>&1
+	  echo "You can remote into the Command Host to finish this task."
  	  echo '-------------------------------------------------------------'
 	  echo '	Setup Completed You can start the assessment tasks          '
 	  echo '-------------------------------------------------------------'
